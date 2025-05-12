@@ -1,0 +1,79 @@
+<div class="register-container">
+  <div class="register-card">
+    <h2>教学管理系统注册</h2>
+    
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">用户名</label>
+        <input 
+          type="text" 
+          id="username" 
+          formControlName="username" 
+          [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+        />
+        <div *ngIf="submitted && f['username'].errors" class="error-message">
+          <div *ngIf="f['username'].errors['required']">请输入用户名</div>
+          <div *ngIf="f['username'].errors['minlength']">用户名至少需要3个字符</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">密码</label>
+        <input 
+          type="password" 
+          id="password" 
+          formControlName="password" 
+          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+        />
+        <div *ngIf="submitted && f['password'].errors" class="error-message">
+          <div *ngIf="f['password'].errors['required']">请输入密码</div>
+          <div *ngIf="f['password'].errors['minlength']">密码至少需要6个字符</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="confirmPassword">确认密码</label>
+        <input 
+          type="password" 
+          id="confirmPassword" 
+          formControlName="confirmPassword" 
+          [ngClass]="{ 'is-invalid': submitted && f['confirmPassword'].errors }"
+        />
+        <div *ngIf="submitted && f['confirmPassword'].errors" class="error-message">
+          <div *ngIf="f['confirmPassword'].errors['required']">请确认密码</div>
+          <div *ngIf="f['confirmPassword'].errors['mustMatch']">两次输入的密码不匹配</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="role">角色</label>
+        <select 
+          id="role" 
+          formControlName="role" 
+          [ngClass]="{ 'is-invalid': submitted && f['role'].errors }"
+        >
+          <option value="student">学生</option>
+          <option value="teacher">教师</option>
+        </select>
+        <div *ngIf="submitted && f['role'].errors" class="error-message">
+          <div *ngIf="f['role'].errors['required']">请选择角色</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <button [disabled]="loading" class="register-btn">
+          <span *ngIf="loading" class="spinner"></span>
+          注册
+        </button>
+      </div>
+      
+      <div *ngIf="error" class="alert-error">
+        {{ error }}
+      </div>
+      
+      <div class="login-link">
+        已有账号？<a routerLink="/login">登录</a>
+      </div>
+    </form>
+  </div>
+</div>

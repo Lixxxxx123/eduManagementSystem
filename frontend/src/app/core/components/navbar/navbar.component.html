@@ -1,0 +1,36 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/">教学管理系统</a>
+  </div>
+  
+  <div class="navbar-menu">
+    <!-- 学生导航项 -->
+    <ng-container *ngIf="authService.currentUserValue?.role === 'student'">
+      <a routerLink="/student/courses" routerLinkActive="active">我的课程</a>
+      <a routerLink="/student/mentor-selection" routerLinkActive="active">导师双选</a>
+      <a routerLink="/student/dashboard" routerLinkActive="active">综合看板</a>
+    </ng-container>
+    
+    <!-- 教师导航项 -->
+    <ng-container *ngIf="authService.currentUserValue?.role === 'teacher'">
+      <a routerLink="/teacher/course-management" routerLinkActive="active">课程管理</a>
+      <a routerLink="/teacher/grading" routerLinkActive="active">课程打分</a>
+      <a routerLink="/teacher/selection-management" routerLinkActive="active">双选管理</a>
+      <a routerLink="/teacher/dashboard" routerLinkActive="active">综合看板</a>
+    </ng-container>
+  </div>
+  
+  <div class="navbar-end">
+    <ng-container *ngIf="authService.currentUserValue; else loginButton">
+      <span class="user-info">
+        {{ authService.currentUserValue.username }} 
+        ({{ authService.currentUserValue.role === 'student' ? '学生' : '教师' }})
+      </span>
+      <button class="logout-btn" (click)="logout()">退出登录</button>
+    </ng-container>
+    
+    <ng-template #loginButton>
+      <a routerLink="/login" class="login-btn">登录</a>
+    </ng-template>
+  </div>
+</nav>

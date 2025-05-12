@@ -1,4 +1,40 @@
 .main-content {
-  padding: 20px;
-  min-height: calc(100vh - 60px);
+  padding: var(--spacing-lg);
+  min-height: calc(100vh - 64px);
+  background-color: var(--background-light);
+  
+  @media (max-width: 768px) {
+    padding: var(--spacing-md);
+  }
+}
+
+.page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.page-header {
+  margin-bottom: var(--spacing-xl);
+  
+  h1 {
+    color: var(--text-primary);
+    font-weight: 600;
+    margin-bottom: var(--spacing-xs);
+  }
+  
+  .page-description {
+    color: var(--text-secondary);
+  }
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
